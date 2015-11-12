@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:background="@drawable/btn_default_bg"
-            android:text="微信登录"/>
-
+            android:text="微信登录"
+            android:textColor="@color/md_black_transparent_87"/>
 
         <Button
             android:id="@+id/btn_qq_login"
@@ -27,10 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:background="@drawable/btn_default_bg"
-            android:text="QQ登录"/>
-
+            android:text="QQ登录"
+            android:textColor="@color/md_black_transparent_87"/>
 
     </LinearLayout>
-
 
 </RelativeLayout>
