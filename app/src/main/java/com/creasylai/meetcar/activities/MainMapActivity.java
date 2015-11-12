@@ -2,35 +2,41 @@ package com.creasylai.meetcar.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.consts.AppConst;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.RecyclerViewCacheUtil;
 
-public class MainMapActivity extends BaseActivity {
+public class MainMapActivity extends BaseActivity implements View.OnClickListener {
 
 	private Drawer result = null;
 	private AccountHeader headerResult = null;
-
+	private UserInterface mUserInterface;
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_main_map);
+		mUserInterface = new UserInterface();
+		findViews(mUserInterface);
 	}
 
 	@Override
 	public void initData(Bundle savedInstanceState) {
+		ViewGroup menu_footview = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_main_map_menu_footview, null, false);
+		mUserInterface.iv_menu_footview = (ImageView) menu_footview.findViewById(R.id.iv_menu_footview);
+		mUserInterface.iv_menu_footview.setOnClickListener(this);
 		final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withIcon(R.mipmap.profile3).withIdentifier(103);
 
 		headerResult = new AccountHeaderBuilder()
@@ -40,6 +46,13 @@ public class MainMapActivity extends BaseActivity {
 				               .withTranslucentStatusBar(false)
 				               .withHeightDp(144)
 				               .addProfiles(profile4)
+				               .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
+					               @Override
+					               public boolean onClick(View view, IProfile profile) {
+						               startActivity(MainMapActivity.this, UserInfoActivity.class);
+						               return true;
+					               }
+				               })
 				               .withSavedInstance(savedInstanceState)
 				               .build();
 
@@ -49,20 +62,36 @@ public class MainMapActivity extends BaseActivity {
 				         .withTranslucentStatusBar(false)
 				         .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
 				         .addDrawerItems(
-						                        new PrimaryDrawerItem().withName("我的聊天").withIcon(android.R.drawable.ic_notification_clear_all).withIconColorRes(R.color.md_black_transparent_54).withSelectable(false).withTextColorRes(R.color.md_black_transparent_87),
-						                        new PrimaryDrawerItem().withName("推荐给好友").withIcon(android.R.drawable.ic_secure).withIconColorRes(R.color.md_black_transparent_54).withSelectable(false).withTextColorRes(R.color.md_black_transparent_87),
-						                        new SecondaryDrawerItem().withName("设置").withIcon(android.R.drawable.ic_menu_set_as).withIconColorRes(R.color.md_black_transparent_54).withSelectable(false).withTextColorRes(R.color.md_black_transparent_87)
+						                        new PrimaryDrawerItem().withName("我的聊天").withIcon(android.R.drawable.ic_notification_clear_all)
+								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.MY_CHAT),
+						                        new PrimaryDrawerItem().withName("推荐给好友").withIcon(android.R.drawable.ic_menu_call)
+								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.SHARE_TO_FRIEND),
+						                        new PrimaryDrawerItem().withName("设置").withIcon(android.R.drawable.ic_menu_set_as)
+								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.SETTING)
 				         )
 				         .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
 					         @Override
 					         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-						         if (drawerItem instanceof Nameable) {
-							         Toast.makeText(MainMapActivity.this, ((Nameable) drawerItem).getName().getText(MainMapActivity.this), Toast.LENGTH_SHORT).show();
+						         switch (drawerItem.getIdentifier()) {
+							         case AppConst.MenuItem.MY_CHAT:
+								         Toast.makeText(MainMapActivity.this, "My_Chat_Click", Toast.LENGTH_SHORT).show();
+								         break;
+							         case AppConst.MenuItem.SHARE_TO_FRIEND:
+								         Toast.makeText(MainMapActivity.this, "Share_To_Friend_Click", Toast.LENGTH_SHORT).show();
+								         break;
+							         case AppConst.MenuItem.SETTING:
+								         startActivity(MainMapActivity.this, SettingActivity.class);
+								         break;
 						         }
-						         return false;
+						         return true;
 					         }
 				         })
-
+				         .withStickyFooter(menu_footview)
+				         .withStickyFooterShadow(false)
+				         .withStickyFooterDivider(false)
 				         .withSliderBackgroundColorRes(android.R.color.white)
 				         .withSelectedItemByPosition(-1)
 				         .withSavedInstance(savedInstanceState)
@@ -76,6 +105,15 @@ public class MainMapActivity extends BaseActivity {
 		if (savedInstanceState == null) {
 			//set the active profile
 			headerResult.setActiveProfile(profile4);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.iv_menu_footview:
+				Toast.makeText(MainMapActivity.this, "FootView_Click", Toast.LENGTH_SHORT).show();
+				break;
 		}
 	}
 
@@ -96,5 +134,12 @@ public class MainMapActivity extends BaseActivity {
 		} else {
 			super.onBackPressed();
 		}
+	}
+
+	private void findViews(UserInterface mUserInterface) {
+	}
+
+	private class UserInterface {
+		public ImageView iv_menu_footview;
 	}
 }
