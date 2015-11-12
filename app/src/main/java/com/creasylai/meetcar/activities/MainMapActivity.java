@@ -89,6 +89,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 						         return true;
 					         }
 				         })
+						 .withInnerShadow(false)
 				         .withStickyFooter(menu_footview)
 				         .withStickyFooterShadow(false)
 				         .withStickyFooterDivider(false)
@@ -96,7 +97,6 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 				         .withSelectedItemByPosition(-1)
 				         .withSavedInstance(savedInstanceState)
 				         .build();
-
 		//if you have many different types of DrawerItems you can magically pre-cache those items to get a better scroll performance
 		//make sure to init the cache after the DrawerBuilder was created as this will first clear the cache to make sure no old elements are in
 		RecyclerViewCacheUtil.getInstance().withCacheSize(2).init(result);
