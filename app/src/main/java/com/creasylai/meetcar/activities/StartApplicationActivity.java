@@ -1,5 +1,6 @@
 package com.creasylai.meetcar.activities;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,7 +12,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 	private UserInterface mUserInterface;
 
 	@Override
-	public void initView() {
+	public void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_start_application);
 		mUserInterface = new UserInterface();
 		findViews(mUserInterface);
@@ -20,7 +21,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 	}
 
 	@Override
-	public void initData() {
+	public void initData(Bundle savedInstanceState) {
 
 	}
 

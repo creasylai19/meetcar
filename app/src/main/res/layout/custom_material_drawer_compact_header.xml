@@ -1,0 +1,91 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="144dp"
+             android:background="@color/md_grey_500">
+
+    <ImageView
+        android:id="@+id/material_drawer_account_header_background"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/material_drawer_account_header"
+        android:layout_width="match_parent"
+        android:layout_height="144dp">
+
+        <com.mikepenz.materialdrawer.view.BezelImageView
+            android:id="@+id/material_drawer_account_header_small_first"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone"/>
+
+        <com.mikepenz.materialdrawer.view.BezelImageView
+            android:id="@+id/material_drawer_account_header_small_second"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone"/>
+
+        <com.mikepenz.materialdrawer.view.BezelImageView
+            android:id="@+id/material_drawer_account_header_small_third"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone"/>
+
+        <com.mikepenz.materialdrawer.view.BezelImageView
+            android:id="@+id/material_drawer_account_header_current"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:clickable="true"
+            android:elevation="2dp"/>
+
+        <LinearLayout
+            android:id="@+id/material_drawer_account_header_text_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/material_drawer_account_header_current"
+            android:layout_toRightOf="@+id/material_drawer_account_header_current"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp">
+
+            <TextView
+                android:id="@+id/material_drawer_account_header_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:singleLine="true"
+                android:text="fdashkj"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/material_drawer_account_header_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:lines="1"
+                android:singleLine="true"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/material_drawer_account_header_text_switcher"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</FrameLayout>

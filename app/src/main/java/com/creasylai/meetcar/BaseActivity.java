@@ -17,10 +17,10 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initView();
-		initData();
+		initView(savedInstanceState);
+		initData(savedInstanceState);
 	}
 
-	public abstract void initView();
-	public abstract void initData();
+	public abstract void initView(Bundle savedInstanceState);
+	public abstract void initData(Bundle savedInstanceState);
 }
