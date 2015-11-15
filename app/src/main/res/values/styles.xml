@@ -26,4 +26,49 @@
         </item>
     </style>
 
+    <style name="MD_Text_Display1">
+        <item name="android:textSize">@dimen/md_text_display1</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
+    <style name="MD_Text_Display2">
+        <item name="android:textSize">@dimen/md_text_display2</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
+    <style name="MD_Text_Display3">
+        <item name="android:textSize">@dimen/md_text_display3</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
+    <style name="MD_Text_Display4">
+        <item name="android:textSize">@dimen/md_text_display4</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
+    <style name="MD_Text_Headline">
+        <item name="android:textSize">@dimen/md_text_headline</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+    <style name="MD_Text_Title">
+        <item name="android:textSize">@dimen/md_text_title</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+    <style name="MD_Text_Subhead">
+        <item name="android:textSize">@dimen/md_text_subhead</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+    <style name="MD_Text_Body">
+        <item name="android:textSize">@dimen/md_text_body</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+    <style name="MD_Text_Caption">
+        <item name="android:textSize">@dimen/md_text_caption</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
+    <style name="MD_Text_Menu">
+        <item name="android:textSize">@dimen/md_text_menu</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+    <style name="MD_Text_Button">
+        <item name="android:textSize">@dimen/md_text_button</item>
+        <item name="android:textColor">@color/md_black_transparent_87</item>
+    </style>
+
 </resources>

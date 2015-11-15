@@ -2,7 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.creasylai.meetcar" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--  common permission-->
+    <uses-permission android:name="android.permission.INTERNET"/><!-- volley、高德地图均使用-->
+
+    <!-- 高德地图使用-->
+    //地图包、搜索包需要的基础权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    //定位包、导航包需要的额外权限（注：基础权限也需要）
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:name=".BaseApplication"
@@ -11,6 +26,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="149b395a94b86f574d1f32925aceaed5"/>
+
         <activity android:name=".activities.MainMapActivity" >
         </activity>
         <activity android:name=".activities.StartApplicationActivity" >
