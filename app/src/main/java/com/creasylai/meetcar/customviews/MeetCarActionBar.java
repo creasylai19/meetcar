@@ -61,6 +61,7 @@ public class MeetCarActionBar extends View {
 		mTextPaint = new TextPaint();
 		mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 		mTextPaint.setTextAlign(Paint.Align.LEFT);
+		setBackgroundColor(Color.parseColor("#FAFAFA"));
 
 		// Update TextPaint and text measurements from attributes
 		invalidateTextPaintAndMeasurements();

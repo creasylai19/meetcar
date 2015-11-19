@@ -3,6 +3,21 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="md_text_align_base_line">72dp</dimen>
+    <dimen name="md_drawer_margin">56dp</dimen>
+    <dimen name="md_floating_action_bar_big">56dp</dimen>
+    <dimen name="md_head_portrait_big">56dp</dimen>
+    <dimen name="md_clickable_zone">48dp</dimen>
+    <dimen name="md_icon_small_clickable_zone">48dp</dimen>
+    <dimen name="md_buttom_navigation_bar_height">48dp</dimen>
+    <dimen name="md_floating_action_bar_small">40dp</dimen>
+    <dimen name="md_head_portrait_small">40dp</dimen>
+    <dimen name="md_dialog_padding">24dp</dimen>
+    <dimen name="md_common_retain_zone">16dp</dimen>
+    <dimen name="md_menu_gap">8dp</dimen>
+    <dimen name="md_card_gap">8dp</dimen>
+    <dimen name="md_tab_buttom_line_height">2dp</dimen>
+    <dimen name="md_card_corner_border">2dp</dimen>
 
     <!-- Text Start-->
     <dimen name="md_text_caption">12sp</dimen><!-- 说明式文字 -->

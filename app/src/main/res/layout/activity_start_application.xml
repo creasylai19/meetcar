@@ -16,7 +16,7 @@
             android:id="@+id/btn_weixin_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="@dimen/md_common_retain_zone"
             android:background="@drawable/btn_default_bg"
             android:text="微信登录"
             android:textColor="@color/md_black_transparent_87"/>
@@ -25,7 +25,7 @@
             android:id="@+id/btn_qq_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/md_common_retain_zone"
             android:background="@drawable/btn_default_bg"
             android:text="QQ登录"
             android:textColor="@color/md_black_transparent_87"/>

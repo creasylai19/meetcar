@@ -24,6 +24,8 @@
         <item name="material_drawer_header_selection_text">
             @color/material_drawer_header_selection_text
         </item>
+        <!--<item name="android:colorBackground">@color/md_grey_200</item>-->
+        <item name="android:windowBackground">@color/md_grey_200</item>
     </style>
 
     <style name="MD_Text_Display1">

@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/md_grey_300"
         app:exampleColor="@color/md_indigo_A200"
-        app:exampleDimension="24sp"
+        app:exampleDimension="@dimen/md_text_headline"
         app:exampleString="自定义ActionBar"/>
 
     <LinearLayout

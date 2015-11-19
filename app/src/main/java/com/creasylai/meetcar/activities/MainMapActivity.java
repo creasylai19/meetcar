@@ -59,6 +59,9 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 					               @Override
 					               public boolean onClick(View view, IProfile profile) {
 						               startActivity(MainMapActivity.this, UserInfoActivity.class);
+						               if( null != MainMapActivity.this.result ) {
+							               MainMapActivity.this.result.closeDrawer();
+						               }
 						               return true;
 					               }
 				               })
@@ -68,6 +71,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		// Create a few sample profile
 		result = new DrawerBuilder()
 				         .withActivity(this)
+						 .withCloseOnClick(true)
 				         .withTranslucentStatusBar(false)
 				         .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
 				         .addDrawerItems(
@@ -95,7 +99,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 								         startActivity(MainMapActivity.this, SettingActivity.class);
 								         break;
 						         }
-						         return true;
+						         return false;
 					         }
 				         })
 						 .withInnerShadow(false)
