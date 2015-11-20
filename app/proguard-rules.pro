@@ -33,3 +33,25 @@
 -keep class com.amap.api.navi.**{*;}
 -keep class com.autonavi.**{*;}
 ##-----amap end------
+##-----youmeng analytics start------
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keep public class com.creasylai.meetcar.R$*{
+public static final int *;
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+##-----youmeng analytics end------
+##-----youmeng update start------
+-keep public class com.umeng.fb.ui.ThreadView {
+}
+# 添加第三方jar包
+-libraryjars libs/umeng-sdk.jar
+# 以下类过滤不混淆
+-keep public class * extends com.umeng.**
+# 以下包不进行过滤
+-keep class com.umeng.** { *; }
+##-----youmeng update end------

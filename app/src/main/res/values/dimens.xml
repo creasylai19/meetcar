@@ -19,6 +19,9 @@
     <dimen name="md_tab_buttom_line_height">2dp</dimen>
     <dimen name="md_card_corner_border">2dp</dimen>
 
+
+    <dimen name="customer_icon_small">16dp</dimen>
+
     <!-- Text Start-->
     <dimen name="md_text_caption">12sp</dimen><!-- 说明式文字 -->
     <dimen name="md_text_menu">13sp</dimen>

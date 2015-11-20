@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.creasylai.meetcar.customviews.MeetCarActionBar
+        android:id="@+id/mc_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:exampleColor="@color/md_black_transparent_87"
+        app:exampleDimension="@dimen/md_text_headline"
+        app:exampleString="关于约车"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mc_actionbar"
+        android:layout_marginTop="@dimen/md_menu_gap">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                style="@style/MD_Text_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/app_name"
+                android:textStyle="bold"/>
+
+            <TextView
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text="Version 1.0.0"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingLeft="112dp">
+
+                <TextView
+                    style="@style/MD_Text_Button_Transparent_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Q Q客服:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2497186479"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/md_text_button"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="112dp">
+
+                <TextView
+                    style="@style/MD_Text_Button_Transparent_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="新浪微博:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ubercoder"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/md_text_button"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="112dp">
+
+                <TextView
+                    style="@style/MD_Text_Button_Transparent_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="网站地址:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="www.ubercoder.cn"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/md_text_button"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_clickable_zone"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/btn_default_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    style="@style/MD_Text_Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="检查更新"/>
+
+            </RelativeLayout>
+
+            <include layout="@layout/common_layout_horizontal_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_user_protocol"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_clickable_zone"
+                android:background="@drawable/btn_default_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    style="@style/MD_Text_Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户协议"/>
+
+                <ImageView
+                    android:layout_width="@dimen/customer_icon_small"
+                    android:layout_height="@dimen/customer_icon_small"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="center"
+                    android:src="@mipmap/icon_right_arrow"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/MD_Text_Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="CopyRight @ ubercoder 版权所有"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

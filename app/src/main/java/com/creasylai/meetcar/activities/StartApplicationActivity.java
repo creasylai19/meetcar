@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.analytics.MobclickAgent;
 
 public class StartApplicationActivity extends BaseActivity implements View.OnClickListener{
 
@@ -22,7 +24,21 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 
 	@Override
 	public void initData(Bundle savedInstanceState) {
+		/** 友盟统计中设置是否对日志信息进行加密, 默认false(不加密). */
+		AnalyticsConfig.enableEncrypt(true);
+		MobclickAgent.setDebugMode(true);//TODO delete
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

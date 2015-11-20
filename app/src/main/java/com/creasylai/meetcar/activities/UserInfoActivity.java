@@ -14,6 +14,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.singleinstance.VolleySingleInstance;
+import com.creasylai.meetcar.utils.SystemUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -36,6 +38,7 @@ public class UserInfoActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				mUserWidget.tv_string_show.setText(SystemUtil.getDeviceInfo(UserInfoActivity.this));
 				JsonObjectRequest getString = new JsonObjectRequest(string_url, null, new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
@@ -79,5 +82,17 @@ public class UserInfoActivity extends BaseActivity {
 		public Button btn_getstring;
 		public TextView tv_string_show;
 		public ImageView iv_image_show;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

@@ -72,5 +72,9 @@
         <item name="android:textSize">@dimen/md_text_button</item>
         <item name="android:textColor">@color/md_black_transparent_87</item>
     </style>
+    <style name="MD_Text_Button_Transparent_54">
+        <item name="android:textSize">@dimen/md_text_button</item>
+        <item name="android:textColor">@color/md_black_transparent_54</item>
+    </style>
 
 </resources>

@@ -9,7 +9,6 @@
         android:id="@+id/mc_actionbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/md_grey_300"
         app:exampleColor="@color/md_black_transparent_87"
         app:exampleDimension="@dimen/md_text_headline"
         app:exampleString="设置"/>
@@ -18,9 +17,132 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/mc_actionbar"
+        android:layout_marginTop="@dimen/md_menu_gap"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/rl_frequently_addr"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常用地址"/>
+
+            <ImageView
+                android:layout_width="@dimen/customer_icon_small"
+                android:layout_height="@dimen/customer_icon_small"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@mipmap/icon_right_arrow"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_chat_setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="聊天设置"/>
+
+            <ImageView
+                android:layout_width="@dimen/customer_icon_small"
+                android:layout_height="@dimen/customer_icon_small"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@mipmap/icon_right_arrow"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:layout_marginTop="@dimen/md_card_gap"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见反馈"/>
+
+            <ImageView
+                android:layout_width="@dimen/customer_icon_small"
+                android:layout_height="@dimen/customer_icon_small"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@mipmap/icon_right_arrow"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_about_meetcar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于约车"/>
+
+            <ImageView
+                android:layout_width="@dimen/customer_icon_small"
+                android:layout_height="@dimen/customer_icon_small"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@mipmap/icon_right_arrow"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_login_out"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:layout_marginTop="@dimen/md_card_gap"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -5,6 +5,10 @@ package com.creasylai.meetcar.consts;
  */
 public interface AppConst {
 
+	interface INTERFACE_URLS {
+		String WEBSITE = "http://www.baidu.com";
+	}
+
 	interface MenuItem {
 		int MY_CHAT = 1;
 		int SHARE_TO_FRIEND = 2;

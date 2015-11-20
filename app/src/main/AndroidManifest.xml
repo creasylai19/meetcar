@@ -2,23 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.creasylai.meetcar" >
 
-
-    <!--  common permission-->
-    <uses-permission android:name="android.permission.INTERNET"/><!-- volley、高德地图均使用-->
-
-    <!-- 高德地图使用-->
-    //地图包、搜索包需要的基础权限
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- common permission start -->
+    <!-- volley、高德地图、友盟统计、友盟更新均使用 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 高德地图、友盟统计、友盟更新均使用 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 高德地图、友盟统计均使用 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 高德地图、友盟更新均使用 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- common permission end -->
+
+    <!-- 高德地图使用 start -->
+    <!-- 地图包、搜索包需要的基础权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    //定位包、导航包需要的额外权限（注：基础权限也需要）
+    <!-- 定位包、导航包需要的额外权限（注：基础权限也需要） -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+    <!-- 高德地图使用 start -->
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -26,13 +31,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="564deb1de0f55a0b89004340" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="web" />
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="149b395a94b86f574d1f32925aceaed5"/>
+            android:value="149b395a94b86f574d1f32925aceaed5" />
 
-        <activity android:name=".activities.MainMapActivity" >
+        <!-- 友盟更新 start-->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+        <!-- 友盟更新 end-->
+
         <activity android:name=".activities.StartApplicationActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,10 +59,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.UserInfoActivity" >
-        </activity>
-        <activity android:name=".activities.SettingActivity" >
-        </activity>
+        <activity android:name=".activities.MainMapActivity" />
+        <activity android:name=".activities.UserInfoActivity" />
+        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.AboutMeetcarActivity" />
+        <activity android:name=".common.WebviewActivity" />
     </application>
 
 </manifest>

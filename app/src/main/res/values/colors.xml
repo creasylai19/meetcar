@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="main_blue">#0091EA</color>
+    <color name="main_red">#E51C23</color>
+    <color name="main_bg">#EEEEEE</color>
+    <color name="main_actionbar">#FAFAFA</color>
+
     <color name="accent">@color/colorAccent</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary">#2196F3</color>

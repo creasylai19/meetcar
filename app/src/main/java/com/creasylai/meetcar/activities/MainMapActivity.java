@@ -11,6 +11,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.common.WebviewActivity;
 import com.creasylai.meetcar.consts.AppConst;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -21,6 +22,8 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.util.RecyclerViewCacheUtil;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import thirdpart.amap.OffLineMapUtils;
 
@@ -36,6 +39,10 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		setContentView(R.layout.activity_main_map);
 		mUserInterface = new UserInterface();
 		findViews(mUserInterface);
+//		UmengUpdateAgent.setDeltaUpdate(false);//false代表全量更新，默认true代表增量更新
+//		UmengUpdateAgent.silentUpdate(this);//当用户进入应用首页后如果处于wifi环境检测更新，如果有更新，后台下载新版本，如果下载成功，则进行通知栏展示，用户点击通知栏开始安装
+		UmengUpdateAgent.update(this);//友盟更新
+
 	}
 
 	@Override
@@ -125,7 +132,8 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.iv_menu_footview:
-				Toast.makeText(MainMapActivity.this, "FootView_Click", Toast.LENGTH_SHORT).show();
+				this.result.closeDrawer();
+				WebviewActivity.startActivity(this, AppConst.INTERFACE_URLS.WEBSITE, getString(R.string.user_protocol));
 				break;
 		}
 	}
@@ -148,6 +156,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onResume(this);
 		mUserInterface.mapView.onResume();
 	}
 
@@ -157,6 +166,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPause(this);
 		mUserInterface.mapView.onPause();
 	}
 
@@ -177,6 +187,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 	protected void onDestroy() {
 		super.onDestroy();
 		mUserInterface.mapView.onDestroy();
+		//MobclickAgent.onKillProcess(this) 如果我们使用Process.kill或者System.exit杀死进程时，需要调用此语句保存统计数据
 	}
 
 	private void findViews(UserInterface mUserInterface) {
