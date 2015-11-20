@@ -1,6 +1,8 @@
 package com.creasylai.meetcar.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,6 +13,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.common.ToastUtils;
 import com.creasylai.meetcar.common.WebviewActivity;
 import com.creasylai.meetcar.consts.AppConst;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -23,9 +26,16 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.util.RecyclerViewCacheUtil;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.SinaShareContent;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.umeng.update.UmengUpdateAgent;
 
-import thirdpart.amap.OffLineMapUtils;
+import thirdparts.amap.OffLineMapUtils;
+import thirdparts.umeng.share.BaseShareFrame;
 
 public class MainMapActivity extends BaseActivity implements View.OnClickListener {
 
@@ -100,7 +110,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 								         Toast.makeText(MainMapActivity.this, "My_Chat_Click", Toast.LENGTH_SHORT).show();
 								         break;
 							         case AppConst.MenuItem.SHARE_TO_FRIEND:
-								         Toast.makeText(MainMapActivity.this, "Share_To_Friend_Click", Toast.LENGTH_SHORT).show();
+								         openSharePannel();
 								         break;
 							         case AppConst.MenuItem.SETTING:
 								         startActivity(MainMapActivity.this, SettingActivity.class);
@@ -125,6 +135,80 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		if (savedInstanceState == null) {
 			//set the active profile
 			headerResult.setActiveProfile(profile4);
+		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ( BaseShareFrame.getShareBoardOpenOrClose() && keyCode == KeyEvent.KEYCODE_BACK ) {
+			BaseShareFrame.mController.dismissShareBoard();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	private void openSharePannel() {
+		BaseShareFrame.initShareWCSQ(this);
+		try {
+			// 设置分享内容
+			BaseShareFrame.mController.setShareContent(getShareText());
+			// 设置分享图片, 参数2为图片的url地址
+			UMImage mUMImage = new UMImage(this, AppConst.SHARE_ICON);
+			BaseShareFrame.mController.setShareMedia(mUMImage);
+			// 设置分享到微信的内容, 图片类型
+			UMImage mUMImgBitmap = new UMImage(this, AppConst.SHARE_ICON);
+			//设置新浪微博分享内容
+			SinaShareContent mSinaShareContent = new SinaShareContent();
+			mSinaShareContent.setShareContent(getShareText());
+			mSinaShareContent.setShareImage(mUMImage);
+			BaseShareFrame.mController.setShareMedia(mSinaShareContent);
+			//设置微信分享内容
+			WeiXinShareContent weixinContent = new WeiXinShareContent(mUMImgBitmap);
+			weixinContent.setShareContent(getShareText());
+			weixinContent.setTargetUrl(getShareUrl());
+			weixinContent.setTitle(getShareTitle());
+			BaseShareFrame.mController.setShareMedia(weixinContent);
+			// 设置朋友圈分享的内容
+			CircleShareContent circleMedia = new CircleShareContent(mUMImgBitmap);
+			circleMedia.setShareContent(getShareText());
+			circleMedia.setTargetUrl(getShareUrl());
+			circleMedia.setTitle(getShareTitle());
+			BaseShareFrame.mController.setShareMedia(circleMedia);
+			//设置QQ分享
+			QQShareContent qqShareContent = new QQShareContent();
+			qqShareContent.setShareContent(getShareText());
+			qqShareContent.setTitle(getShareTitle());
+			qqShareContent.setTargetUrl(getShareUrl());
+			BaseShareFrame.mController.setShareMedia(qqShareContent);
+
+			BaseShareFrame.mController.openShare(this, false);
+		} catch (Exception e) {
+			ToastUtils.toastShort(this, e.getMessage());
+		}
+	}
+
+	private String getShareTitle() {
+		//TODO
+		return "标题";
+	}
+
+	private String getShareUrl() {
+		//TODO
+		return "www.ubercoder.com";
+	}
+
+	private String getShareText() {
+		//TODO
+		return "内容";
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/**使用SSO授权必须添加如下代码 */
+		UMSsoHandler ssoHandler = BaseShareFrame.mController.getConfig().getSsoHandler(requestCode) ;
+		if(ssoHandler != null){
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
 	}
 

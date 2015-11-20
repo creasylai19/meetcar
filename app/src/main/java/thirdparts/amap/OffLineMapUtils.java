@@ -1,4 +1,4 @@
-package thirdpart.amap;
+package thirdparts.amap;
 
 import android.content.Context;
 import android.os.Environment;
