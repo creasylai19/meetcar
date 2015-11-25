@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.creasylai.meetcar.utils.LruBitmapCache;
+import com.creasylai.meetcar.framework.LruBitmapCache;
 
 /**
  * Created by laicreasy on 15/11/15.

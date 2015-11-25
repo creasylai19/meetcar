@@ -1,5 +1,6 @@
 package com.creasylai.meetcar.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -7,6 +8,8 @@ import android.widget.Toast;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.consts.AppConst;
+import com.creasylai.meetcar.consts.AppPreferenceCache;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
@@ -78,7 +81,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                   public void onComplete(int status, SocializeEntity entity) {
                       if (status == 200) {
                           Toast.makeText(SettingActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
-                          //TODO do something
+	                      AppPreferenceCache.getInstance(SettingActivity.this).clearAllCache();
+	                      Intent intent = new Intent(SettingActivity.this, MainMapActivity.class);
+	                      intent.putExtra(AppConst.STATIC_STRING_KEY.LOGIN_OUT, true);
+	                      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	                      startActivity(intent);
+	                      finish();
                       } else {
                           Toast.makeText(SettingActivity.this, "登出失败", Toast.LENGTH_SHORT).show();
                       }

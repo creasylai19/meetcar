@@ -1,14 +1,19 @@
 package com.creasylai.meetcar.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.common.ToastUtils;
+import com.creasylai.meetcar.consts.AppConst;
+import com.creasylai.meetcar.consts.AppPreferenceCache;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -23,14 +28,43 @@ import thirdparts.umeng.login.BaseLoginFrame;
 public class StartApplicationActivity extends BaseActivity implements View.OnClickListener{
 
 	private UserInterface mUserInterface;
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case AppConst.STATIC_INT_KEY.COMMON_KEY_0:
+					goToMainPage();
+					break;
+				case AppConst.STATIC_INT_KEY.COMMON_KEY_1:
+					goGuidePage();
+					break;
+			}
+			super.handleMessage(msg);
+		}
+	};
+
+	private void goToMainPage() {
+		startActivity(this, MainMapActivity.class);
+		finish();
+	}
+
+	private void goGuidePage() {
+
+	}
+
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_start_application);
 		mUserInterface = new UserInterface();
 		findViews(mUserInterface);
-		mUserInterface.btn_qq_login.setOnClickListener(this);
-		mUserInterface.btn_weixin_login.setOnClickListener(this);
+		if(AppPreferenceCache.getInstance(this).isLogin()) {
+			mUserInterface.ll_login.setVisibility(View.GONE);
+			handler.sendEmptyMessageDelayed(AppConst.STATIC_INT_KEY.COMMON_KEY_0, AppConst.STATIC_INT_KEY.GO_HOME_DELAY);
+		} else {
+			mUserInterface.btn_qq_login.setOnClickListener(this);
+			mUserInterface.btn_weixin_login.setOnClickListener(this);
+		}
 	}
 
 	@Override
@@ -114,6 +148,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 //			}
 //		} );
 		ToastUtils.toastShort(this, R.string.login_using_qq);
+		oauthVerifySuccess(null);
 	}
 
 	private void qq_login() {
@@ -148,8 +183,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 								sb.append(key + "=" + info.get(key).toString() + "\r\n");
 							}
 							Log.d("TestData", sb.toString());
-							startActivity(StartApplicationActivity.this, MainMapActivity.class);
-							finish();
+							oauthVerifySuccess(null);
 						} else {
 							Log.d("TestData", "发生错误：" + status);
 						}
@@ -164,12 +198,20 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 		});
 	}
 
+	private void oauthVerifySuccess(Map<String, Object> info) {
+		//TODO GET USER_TOKEN
+		AppPreferenceCache.getInstance(this).setUserToken("ceshi");
+		goToMainPage();
+	}
+
 	private void findViews( UserInterface mUserInterface ) {
+		mUserInterface.ll_login = (LinearLayout)findViewById(R.id.ll_login);
 		mUserInterface.btn_weixin_login = (ImageView)findViewById(R.id.btn_weixin_login);
 		mUserInterface.btn_qq_login = (ImageView)findViewById(R.id.btn_qq_login);
 	}
 
 	private class UserInterface {
+		public LinearLayout ll_login;
 		public ImageView btn_weixin_login;
 		public ImageView btn_qq_login;
 	}

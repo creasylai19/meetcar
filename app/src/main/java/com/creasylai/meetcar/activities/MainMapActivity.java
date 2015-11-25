@@ -46,6 +46,11 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
+		Intent intent = getIntent();//如果是登出，则结束本页面，启动登陆页
+		if( null != intent && intent.getBooleanExtra(AppConst.STATIC_STRING_KEY.LOGIN_OUT, false) ) {
+			startActivity(this, StartApplicationActivity.class);
+			finish();
+		}
 		setContentView(R.layout.activity_main_map);
 		mUserInterface = new UserInterface();
 		findViews(mUserInterface);
@@ -94,25 +99,25 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 				         .addDrawerItems(
 						                        new PrimaryDrawerItem().withName("我的聊天").withIcon(android.R.drawable.ic_notification_clear_all)
 								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
-								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.MY_CHAT),
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MENUITEM.MY_CHAT),
 						                        new PrimaryDrawerItem().withName("推荐给好友").withIcon(android.R.drawable.ic_menu_call)
 								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
-								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.SHARE_TO_FRIEND),
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MENUITEM.SHARE_TO_FRIEND),
 						                        new PrimaryDrawerItem().withName("设置").withIcon(android.R.drawable.ic_menu_set_as)
 								                        .withIconColorRes(R.color.md_black_transparent_54).withSelectable(false)
-								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MenuItem.SETTING)
+								                        .withTextColorRes(R.color.md_black_transparent_87).withIdentifier(AppConst.MENUITEM.SETTING)
 				         )
 				         .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
 					         @Override
 					         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 						         switch (drawerItem.getIdentifier()) {
-							         case AppConst.MenuItem.MY_CHAT:
+							         case AppConst.MENUITEM.MY_CHAT:
 								         Toast.makeText(MainMapActivity.this, "My_Chat_Click", Toast.LENGTH_SHORT).show();
 								         break;
-							         case AppConst.MenuItem.SHARE_TO_FRIEND:
+							         case AppConst.MENUITEM.SHARE_TO_FRIEND:
 								         openSharePannel();
 								         break;
-							         case AppConst.MenuItem.SETTING:
+							         case AppConst.MENUITEM.SETTING:
 								         startActivity(MainMapActivity.this, SettingActivity.class);
 								         break;
 						         }

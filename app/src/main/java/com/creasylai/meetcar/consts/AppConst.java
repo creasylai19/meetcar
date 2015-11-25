@@ -17,10 +17,32 @@ public interface AppConst {
 		String WEBSITE = "http://www.baidu.com";
 	}
 
-	interface MenuItem {
+	interface MENUITEM {
 		int MY_CHAT = 1;
 		int SHARE_TO_FRIEND = 2;
 		int SETTING = 3;
+	}
+
+	interface STATIC_STRING_KEY {
+		String APP_SHARE_PREFERENCE = "APP_SHARE_PREFERENCE";
+		String USER_TOKEN = "USER_TOKEN";
+		String USER_ID = "USER_ID";
+		String LOGIN_OUT = "LOGIN_OUT";
+	}
+
+	interface STATIC_INT_KEY {
+		int COMMON_KEY_0 = 0;
+		int COMMON_KEY_1 = 1;
+		int COMMON_KEY_2 = 2;
+		int COMMON_KEY_3 = 3;
+		int COMMON_KEY_4 = 4;
+		int COMMON_KEY_5 = 5;
+		int COMMON_KEY_6 = 6;
+		int COMMON_KEY_7 = 7;
+		int COMMON_KEY_8 = 8;
+		int COMMON_KEY_9 = 9;
+
+		int GO_HOME_DELAY = 1000;
 	}
 
 }
