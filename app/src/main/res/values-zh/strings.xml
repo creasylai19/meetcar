@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- common string -->
+    <string name="loading">加载中…</string>
+    <string name="err_unknown">未知错误</string>
+    <string name="url_err">网址不对</string>
+
+    <!-- Page -->
+    <string name="user_info">用户信息</string>
+
+    <!-- 关于页面 -->
+    <string name="user_protocol">用户协议</string>
+
+    <!-- 启动页 -->
+    <string name="login_using_qq">请使用QQ进行登录</string>
+    <string name="qq_login">Q Q</string>
+    <string name="wechat_login">微信</string>
+</resources>

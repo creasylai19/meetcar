@@ -2,10 +2,11 @@ package com.creasylai.meetcar.activities;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.common.ToastUtils;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
 
@@ -56,8 +57,9 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 	}
 
 	private void weixin_login() {
-		startActivity(this, MainMapActivity.class);
-		this.finish();
+//		startActivity(this, MainMapActivity.class);
+//		this.finish();
+		ToastUtils.toastShort(this, R.string.login_using_qq);
 	}
 
 	private void qq_login() {
@@ -67,12 +69,12 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 	}
 
 	private void findViews( UserInterface mUserInterface ) {
-		mUserInterface.btn_weixin_login = (Button)findViewById(R.id.btn_weixin_login);
-		mUserInterface.btn_qq_login = (Button)findViewById(R.id.btn_qq_login);
+		mUserInterface.btn_weixin_login = (ImageView)findViewById(R.id.btn_weixin_login);
+		mUserInterface.btn_qq_login = (ImageView)findViewById(R.id.btn_qq_login);
 	}
 
 	private class UserInterface {
-		public Button btn_weixin_login;
-		public Button btn_qq_login;
+		public ImageView btn_weixin_login;
+		public ImageView btn_qq_login;
 	}
 }

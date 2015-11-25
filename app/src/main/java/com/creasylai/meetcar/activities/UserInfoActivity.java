@@ -66,7 +66,7 @@ public class UserInfoActivity extends BaseActivity {
 				                                       }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, null,
 				                                       new Response.ErrorListener() {
 					                                       public void onErrorResponse(VolleyError error) {
-						                                       mUserWidget.iv_image_show.setImageResource(R.mipmap.ic_launcher);
+						                                       mUserWidget.iv_image_show.setImageResource(R.drawable.ic_launcher);
 					                                       }
 				                                       });
 		VolleySingleInstance.getInstance(this).addToRequestQueue(request);

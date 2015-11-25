@@ -63,7 +63,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		ViewGroup menu_footview = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_main_map_menu_footview, null, false);
 		mUserInterface.iv_menu_footview = (ImageView) menu_footview.findViewById(R.id.iv_menu_footview);
 		mUserInterface.iv_menu_footview.setOnClickListener(this);
-		final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withIcon(R.mipmap.profile3).withIdentifier(103);
+		final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withIcon(R.drawable.profile3).withIdentifier(103);
 
 		headerResult = new AccountHeaderBuilder()
 				               .withActivity(this)

@@ -30,7 +30,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="48dp"
                 android:scaleType="centerInside"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/ic_launcher"/>
 
             <TextView
                 style="@style/MD_Text_Title"
@@ -168,7 +168,7 @@
                     android:layout_height="@dimen/customer_icon_small"
                     android:layout_alignParentRight="true"
                     android:scaleType="center"
-                    android:src="@mipmap/icon_right_arrow"/>
+                    android:src="@drawable/icon_right_arrow"/>
 
             </RelativeLayout>
         </LinearLayout>
