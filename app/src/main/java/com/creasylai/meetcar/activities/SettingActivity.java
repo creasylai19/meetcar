@@ -3,10 +3,16 @@ package com.creasylai.meetcar.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.listener.SocializeListeners;
+
+import thirdparts.umeng.login.BaseLoginFrame;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -54,10 +60,30 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 				startActivity(this, AboutMeetcarActivity.class);
 				break;
 			case R.id.rl_login_out:
+				login_out();
 				break;
 			default:
 				break;
 		}
+	}
+
+	private void login_out() {
+		BaseLoginFrame.mController.deleteOauth(this, SHARE_MEDIA.SINA,
+              new SocializeListeners.SocializeClientListener() {
+                  @Override
+                  public void onStart() {
+                  }
+
+                  @Override
+                  public void onComplete(int status, SocializeEntity entity) {
+                      if (status == 200) {
+                          Toast.makeText(SettingActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
+                          //TODO do something
+                      } else {
+                          Toast.makeText(SettingActivity.this, "登出失败", Toast.LENGTH_SHORT).show();
+                      }
+                  }
+              });
 	}
 
 	private void findViews(UserInterface mUserInterface) {

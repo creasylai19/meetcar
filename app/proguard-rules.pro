@@ -96,3 +96,16 @@ public static final int *;
     public static final int *;
 }
 ##-----youmeng social end------
+##-----youmeng login end------
+-libraryjars libs/umeng_social_sdk.jar
+-libraryjars libs/Android_Map_V3.0.20150831.jar
+-libraryjars libs/AMap_Search_v2.6.0_20150914.jar
+-libraryjars libs/umeng-update-v2.6.0.1.jar
+-libraryjars libs/httpmime-4.1.3.jar
+-libraryjars libs/SocialSDK_QQZone_1.jar
+-libraryjars libs/SocialSDK_QQZone_2.jar
+-libraryjars libs/SocialSDK_QQZone_3.jar
+-libraryjars libs/SocialSDK_WeiXin_1.jar
+-libraryjars libs/SocialSDK_WeiXin_2.jar
+-libraryjars libs/SocialSDK_Sina.jar
+##-----youmeng login end------
