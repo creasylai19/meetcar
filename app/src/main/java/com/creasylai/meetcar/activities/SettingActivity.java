@@ -1,7 +1,9 @@
 package com.creasylai.meetcar.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -11,11 +13,6 @@ import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.consts.AppConst;
 import com.creasylai.meetcar.consts.AppPreferenceCache;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.bean.SocializeEntity;
-import com.umeng.socialize.controller.listener.SocializeListeners;
-
-import thirdparts.umeng.login.BaseLoginFrame;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -54,6 +51,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.rl_frequently_addr:
+				startActivity(this, CommonUsingAddressActivity.class);
 				break;
 			case R.id.rl_chat_setting:
 				break;
@@ -63,35 +61,48 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 				startActivity(this, AboutMeetcarActivity.class);
 				break;
 			case R.id.rl_login_out:
-				login_out();
+				showLogoutAlertDialog();
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void login_out() {
-		BaseLoginFrame.mController.deleteOauth(this, SHARE_MEDIA.SINA,
-              new SocializeListeners.SocializeClientListener() {
-                  @Override
-                  public void onStart() {
-                  }
+	private void showLogoutAlertDialog() {
+		AlertDialog mAlertDialog = new AlertDialog.Builder(this).setCancelable(true).setMessage(R.string.txt_dialog_reminder_logout)
+				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						login_out();
+					}
+				}).setPositiveButton(R.string.btn_confirm,null).setTitle(R.string.txt_dialog_tip).create();
+		mAlertDialog.show();
+	}
 
-                  @Override
-                  public void onComplete(int status, SocializeEntity entity) {
-                      if (status == 200) {
-                          Toast.makeText(SettingActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
-	                      AppPreferenceCache.getInstance(SettingActivity.this).clearAllCache();
-	                      Intent intent = new Intent(SettingActivity.this, MainMapActivity.class);
-	                      intent.putExtra(AppConst.STATIC_STRING_KEY.LOGIN_OUT, true);
-	                      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-	                      startActivity(intent);
-	                      finish();
-                      } else {
-                          Toast.makeText(SettingActivity.this, "登出失败", Toast.LENGTH_SHORT).show();
-                      }
-                  }
-              });
+
+	private void login_out() {
+		Toast.makeText(SettingActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
+		AppPreferenceCache.getInstance(SettingActivity.this).clearAllCache();
+		Intent intent = new Intent(SettingActivity.this, MainMapActivity.class);
+		intent.putExtra(AppConst.STATIC_STRING_KEY.LOGIN_OUT, true);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		startActivity(intent);
+		finish();
+//		BaseLoginFrame.mController.deleteOauth(this, SHARE_MEDIA.SINA,
+//              new SocializeListeners.SocializeClientListener() {
+//                  @Override
+//                  public void onStart() {
+//                  }
+//
+//                  @Override
+//                  public void onComplete(int status, SocializeEntity entity) {
+//                      if (status == 200) {
+//
+//                      } else {
+//                          Toast.makeText(SettingActivity.this, "登出失败", Toast.LENGTH_SHORT).show();
+//                      }
+//                  }
+//              });
 	}
 
 	private void findViews(UserInterface mUserInterface) {

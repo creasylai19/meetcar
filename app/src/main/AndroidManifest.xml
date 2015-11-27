@@ -108,6 +108,7 @@
         <activity android:name=".activities.SettingActivity" />
         <activity android:name=".activities.AboutMeetcarActivity" />
         <activity android:name=".common.WebviewActivity" />
+        <activity android:name="com.creasylai.meetcar.activities.CommonUsingAddressActivity" />
     </application>
 
 </manifest>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">约车</string>
+
+    <string name="btn_cancel">取消</string>
+    <string name="btn_confirm">确认</string>
+    <string name="txt_dialog_tip">提示</string>
+
+    <string name="txt_dialog_reminder_logout">确定要退出账号么？</string>
 </resources>
