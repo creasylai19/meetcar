@@ -23,11 +23,18 @@ public interface AppConst {
 		int SETTING = 3;
 	}
 
+	interface SEX {
+		int UNSET = 0;
+		int MAN = 1;
+		int WOMAN = 2;
+	}
+
 	interface STATIC_STRING_KEY {
 		String APP_SHARE_PREFERENCE = "APP_SHARE_PREFERENCE";
 		String USER_TOKEN = "USER_TOKEN";
 		String USER_ID = "USER_ID";
 		String LOGIN_OUT = "LOGIN_OUT";
+		String USER_INFO = "USER_INFO";
 	}
 
 	interface STATIC_INT_KEY {

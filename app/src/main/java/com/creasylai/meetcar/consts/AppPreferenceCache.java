@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.creasylai.meetcar.bean.UserBean;
+
 /**
  * Created by laicreasy on 15/11/25.
  */
@@ -55,6 +57,10 @@ public class AppPreferenceCache {
 	public void clearAllCache() {
 		editor.clear();
 		editor.commit();
+	}
+
+	public UserBean getUserBean() {
+		return UserBean.getUserBean(sharedPreferences.getString(AppConst.STATIC_STRING_KEY.USER_INFO, ""));
 	}
 
 }

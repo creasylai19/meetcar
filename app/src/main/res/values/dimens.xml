@@ -7,7 +7,7 @@
     <dimen name="md_drawer_margin">56dp</dimen>
     <dimen name="md_floating_action_bar_big">56dp</dimen>
     <dimen name="md_head_portrait_big">56dp</dimen>
-    <dimen name="md_two_view_zone">56dp</dimen>
+    <dimen name="custom_common_block_high">56dp</dimen>
     <dimen name="md_clickable_zone">48dp</dimen>
     <dimen name="md_icon_small_clickable_zone">48dp</dimen>
     <dimen name="md_buttom_navigation_bar_height">48dp</dimen>

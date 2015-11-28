@@ -1,31 +1,194 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.creasylai.meetcar.customviews.MeetCarActionBar
+        android:id="@+id/mc_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:exampleColor="@color/md_black_transparent_87"
+        app:exampleDimension="@dimen/md_text_headline"
+        app:exampleString="个人信息"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mc_actionbar"
+        android:layout_marginTop="@dimen/md_menu_gap"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_getstring"
+        <RelativeLayout
+            android:id="@+id/rl_user_portrait"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/bottom_bar"
-            android:text="getString"/>
+            android:layout_height="@dimen/custom_common_block_high"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <ImageView
-            android:id="@+id/iv_image_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="头像"/>
 
-        <TextView
-            android:id="@+id/tv_string_show"
+            <com.mikepenz.materialdrawer.view.BezelImageView
+                android:id="@+id/biv_user_portrait"
+                android:layout_width="@dimen/md_icon_small_clickable_zone"
+                android:layout_height="@dimen/md_icon_small_clickable_zone"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:scaleType="center"
+                android:src="@drawable/profile3"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_nickname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"/>
+
+            <TextView
+                android:id="@+id/tv_user_nickname"
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="creasylai"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_sex"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="性别"/>
+
+            <TextView
+                android:id="@+id/tv_user_sex"
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="男"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_age"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年龄"/>
+
+            <TextView
+                android:id="@+id/tv_user_age"
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="80后"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_job"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:layout_marginTop="@dimen/md_card_gap"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="行业"/>
+
+            <TextView
+                android:id="@+id/tv_user_job"
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="计算机|互联网"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_user_signature"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个性签名"/>
+
+            <TextView
+                android:id="@+id/tv_user_signature"
+                style="@style/MD_Text_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="迎娶白富美，走人生巅峰"/>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>
+
