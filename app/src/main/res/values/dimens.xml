@@ -26,13 +26,17 @@
     <dimen name="customer_icon_small">16dp</dimen>
 
     <!-- Text Start-->
-    <dimen name="md_text_caption">12sp</dimen><!-- 说明式文字 -->
+    <dimen name="md_text_caption">12sp</dimen>
+    <!-- 说明式文字 -->
     <dimen name="md_text_menu">13sp</dimen>
     <dimen name="md_text_button">14sp</dimen>
     <dimen name="md_text_body">14sp</dimen>
-    <dimen name="md_text_subhead">16sp</dimen><!--小标题-->
-    <dimen name="md_text_title">20sp</dimen><!--标题-->
-    <dimen name="md_text_headline">24sp</dimen><!--大标题（新闻）-->
+    <dimen name="md_text_subhead">16sp</dimen>
+    <!--小标题-->
+    <dimen name="md_text_title">20sp</dimen>
+    <!--标题-->
+    <dimen name="md_text_headline">24sp</dimen>
+    <!--大标题（新闻）-->
     <dimen name="md_text_display1">34sp</dimen>
     <dimen name="md_text_display2">45sp</dimen>
     <dimen name="md_text_display3">56sp</dimen>

@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.singleinstance.VolleySingleInstance;
-import com.creasylai.meetcar.utils.SystemUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
@@ -38,7 +37,7 @@ public class VolleyExampleActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				mUserWidget.tv_string_show.setText(SystemUtil.getDeviceInfo(VolleyExampleActivity.this));
+//				mUserWidget.tv_string_show.setText(SystemUtil.getDeviceInfo(VolleyExampleActivity.this));
 				JsonObjectRequest getString = new JsonObjectRequest(string_url, null, new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
@@ -73,9 +72,9 @@ public class VolleyExampleActivity extends BaseActivity {
 	}
 
 	public void findWidget(UserWidget mUserWidget) {
-		mUserWidget.btn_getstring = (Button) findViewById(R.id.btn_getstring);
-		mUserWidget.tv_string_show = (TextView) findViewById(R.id.tv_string_show);
-		mUserWidget.iv_image_show = (ImageView) findViewById(R.id.iv_image_show);
+//		mUserWidget.btn_getstring = (Button) findViewById(R.id.btn_getstring);
+//		mUserWidget.tv_string_show = (TextView) findViewById(R.id.tv_string_show);
+//		mUserWidget.iv_image_show = (ImageView) findViewById(R.id.iv_image_show);
 	}
 
 	private class UserWidget {

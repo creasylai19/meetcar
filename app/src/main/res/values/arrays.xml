@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="jobs">
+        <item>计算机|互联网</item>
+        <item>通讯|硬件</item>
+        <item>房地产|建筑</item>
+        <item>文化传媒</item>
+        <item>金融类</item>
+        <item>消费品</item>
+        <item>汽车|机械</item>
+        <item>教育|翻译</item>
+        <item>贸易|物流</item>
+        <item>生物|医疗</item>
+        <item>政府机构</item>
+        <item>其它行业</item>
+    </string-array>
+</resources>

@@ -70,12 +70,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
 	private void showLogoutAlertDialog() {
 		AlertDialog mAlertDialog = new AlertDialog.Builder(this).setCancelable(true).setMessage(R.string.txt_dialog_reminder_logout)
-				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+				.setNegativeButton(R.string.btn_cancel, null).setPositiveButton(R.string.btn_confirm,new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						login_out();
 					}
-				}).setPositiveButton(R.string.btn_confirm,null).setTitle(R.string.txt_dialog_tip).create();
+				}).setTitle(R.string.txt_dialog_tip).create();
 		mAlertDialog.show();
 	}
 

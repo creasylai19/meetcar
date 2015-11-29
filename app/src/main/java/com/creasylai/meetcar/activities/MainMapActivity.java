@@ -199,7 +199,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 
 	private String getShareUrl() {
 		//TODO
-		return "www.ubercoder.com";
+		return "http://www.ubercoder.com";
 	}
 
 	private String getShareText() {

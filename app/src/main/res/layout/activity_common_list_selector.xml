@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.creasylai.meetcar.customviews.MeetCarActionBar
+        android:id="@+id/mc_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:exampleColor="@color/md_black_transparent_87"
+        app:exampleDimension="@dimen/md_text_headline"
+        app:exampleString="行业选择"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mc_actionbar"
+        android:layout_marginTop="@dimen/md_menu_gap"
+        android:background="@color/md_white_1000"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_common"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
+    </LinearLayout>
+
+</RelativeLayout>

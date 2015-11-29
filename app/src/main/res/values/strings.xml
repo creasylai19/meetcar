@@ -6,4 +6,8 @@
     <string name="txt_dialog_tip">提示</string>
 
     <string name="txt_dialog_reminder_logout">确定要退出账号么？</string>
+    <string name="txt_is_save_data">是否保存数据</string>
+    <string name="txt_not_save">不保存</string>
+    <string name="txt_save">保存</string>
+    <string name="can_not_find_version_name">找不到版本信息</string>
 </resources>

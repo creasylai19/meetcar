@@ -83,4 +83,15 @@ public class UserBean {
 		return gson.toJson(userBean);
 	}
 
+	public static UserBean getTestBean() {
+		UserBean userBean = new UserBean();
+		userBean.setBirthday("90后");
+		userBean.setJob("计算机|互联网");
+		userBean.setNickname("creasylai");
+		userBean.setSex(1);
+		userBean.setSignature("我思固我在");
+		userBean.setHeadurl("http://img1.2345.com/duoteimg/qqTxImg/2013/12/ka_3/04-054424_937.jpg");
+		return userBean;
+	}
+
 }

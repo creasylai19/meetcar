@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="MaterialDrawerTheme">
+    <style name="AppTheme" parent="MaterialDrawerTheme.Light">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
