@@ -2,6 +2,7 @@ package com.creasylai.meetcar.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.umeng.update.UmengUpdateAgent;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import thirdparts.amap.OffLineMapUtils;
 import thirdparts.umeng.share.BaseShareFrame;
 
@@ -57,7 +60,34 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 //		UmengUpdateAgent.setDeltaUpdate(false);//false代表全量更新，默认true代表增量更新
 //		UmengUpdateAgent.silentUpdate(this);//当用户进入应用首页后如果处于wifi环境检测更新，如果有更新，后台下载新版本，如果下载成功，则进行通知栏展示，用户点击通知栏开始安装
 		UmengUpdateAgent.update(this);//友盟更新
+		initRongIM();
+	}
 
+	private void initRongIM() {
+		String Token = "J0Xkg5vlVi1R8yZZ9hzSuSNcYy6GDww/zllT84U4sQ3E3gSCHv3//uZ0Vc2T8Z40MRdfEF86Dc63CoApZx4DRw==";
+		/**
+		 * IMKit SDK调用第二步
+		 *
+		 * 建立与服务器的连接
+		 *
+		 */
+		RongIM.connect(Token, new RongIMClient.ConnectCallback() {
+			@Override
+			public void onTokenIncorrect() {
+
+			}
+
+			@Override
+			public void onSuccess(String userId) {
+				Log.e("MainActivity", "——onSuccess— -" + userId);
+				ToastUtils.toastShort(MainMapActivity.this, "RongIM Connect Success");
+			}
+
+			@Override
+			public void onError(RongIMClient.ErrorCode errorCode) {
+				Log.e("MainActivity", "——onError— -" + errorCode);
+			}
+		});
 	}
 
 	@Override

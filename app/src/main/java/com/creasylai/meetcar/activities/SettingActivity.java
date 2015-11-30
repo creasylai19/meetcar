@@ -14,6 +14,9 @@ import com.creasylai.meetcar.consts.AppConst;
 import com.creasylai.meetcar.consts.AppPreferenceCache;
 import com.umeng.analytics.MobclickAgent;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
+
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
 	private UserInterface mUserInterface;
@@ -54,8 +57,20 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 				startActivity(this, CommonUsingAddressActivity.class);
 				break;
 			case R.id.rl_chat_setting:
+				startActivity(this, ChatSettingActivity.class);
 				break;
 			case R.id.rl_user_feedback:
+				RongIM.getInstance().startConversation(this, Conversation.ConversationType.APP_PUBLIC_SERVICE, "KEFU144889862239428", getString(R.string.app_name));
+				/**
+				 * 启动单聊
+				 * context - 应用上下文。
+				 * targetUserId - 要与之聊天的用户 Id。
+				 * title - 聊天的标题，如果传入空值，则默认显示与之聊天的用户名称。
+				 */
+//				if (RongIM.getInstance() != null) {
+//					RongIM.getInstance().startPrivateChat(SettingActivity.this, "2462", "hello");
+//				}
+//				startActivity(this, FeedbackActivity.class);
 				break;
 			case R.id.rl_about_meetcar:
 				startActivity(this, AboutMeetcarActivity.class);

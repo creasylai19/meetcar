@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.creasylai.meetcar.customviews.MeetCarActionBar
+        android:id="@+id/mc_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:exampleColor="@color/md_black_transparent_87"
+        app:exampleDimension="@dimen/md_text_headline"
+        app:exampleString="设置"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mc_actionbar"
+        android:layout_marginTop="@dimen/md_menu_gap"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_blacklist_mg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="黑名单管理"/>
+
+            <ImageView
+                android:layout_width="@dimen/customer_icon_small"
+                android:layout_height="@dimen/customer_icon_small"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@drawable/icon_right_arrow"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_chat_setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加我进群，需要我通过"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_layout_horizontal_divider"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_about_meetcar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"
+            android:background="@drawable/btn_default_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/MD_Text_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出应用仍接收消息提醒"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+

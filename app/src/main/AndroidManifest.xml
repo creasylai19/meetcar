@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.creasylai.meetcar"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.creasylai.meetcar"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- common permission start -->
     <!-- volley、高德地图、友盟统计、友盟更新、友盟分享均使用 -->
@@ -100,7 +101,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- ubercoder 友盟分享 end -->
 
-        <activity android:name=".activities.StartApplicationActivity">
+        <activity
+            android:name=".activities.StartApplicationActivity"
+            android:theme="@style/activityStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -109,16 +112,53 @@
         </activity>
         <activity
             android:name=".activities.MainMapActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activities.UserInfoActivity"/>
-        <activity android:name=".activities.SettingActivity"/>
-        <activity android:name=".activities.AboutMeetcarActivity"/>
-        <activity android:name=".common.WebviewActivity"/>
-        <activity android:name=".activities.CommonUsingAddressActivity"/>
-        <activity android:name=".activities.CommonInfoInputActivity"
-            android:windowSoftInputMode="stateAlwaysVisible">
-        </activity>
-        <activity android:name=".activities.CommonListSelectorActivity">
+            android:launchMode="singleTask"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.UserInfoActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.SettingActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.AboutMeetcarActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".common.WebviewActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.CommonUsingAddressActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.CommonInfoInputActivity"
+            android:theme="@style/activityStyle"
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity
+            android:name=".activities.CommonListSelectorActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.ChatSettingActivity"
+            android:theme="@style/activityStyle"/>
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:theme="@style/activityStyle"/>
+        <!--会话界面-->
+        <activity
+            android:name="com.creasylai.meetcar.activities.im.ConversationActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_conversation"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.creasylai.meetcar"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
         </activity>
     </application>
 
