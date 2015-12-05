@@ -142,6 +142,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 					         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 						         switch (drawerItem.getIdentifier()) {
 							         case AppConst.MENUITEM.MY_CHAT:
+								         goToChatPage();
 								         Toast.makeText(MainMapActivity.this, "My_Chat_Click", Toast.LENGTH_SHORT).show();
 								         break;
 							         case AppConst.MENUITEM.SHARE_TO_FRIEND:
@@ -171,6 +172,10 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 			//set the active profile
 			headerResult.setActiveProfile(profile4);
 		}
+	}
+
+	private void goToChatPage() {
+		
 	}
 
 	@Override
