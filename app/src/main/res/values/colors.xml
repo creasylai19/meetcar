@@ -12,6 +12,7 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="materialize_accent">@color/accent</color>
+    <color name="window_bg">@color/md_grey_200</color>
 
     <color name="md_black_transparent_87">#de000000</color><!-- black 87%不透明度 -->
     <color name="md_black_transparent_54">#88000000</color><!-- black 54%不透明度 -->

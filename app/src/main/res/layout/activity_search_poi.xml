@@ -9,19 +9,34 @@
         android:id="@+id/mc_actionbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:exampleColor="@color/md_black_transparent_87"
+        android:background="@color/md_grey_300"
+        app:exampleColor="@color/md_indigo_A200"
         app:exampleDimension="@dimen/md_text_headline"
-        app:exampleString="常用地址"/>
+        app:exampleString="自定义ActionBar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/mc_actionbar"
-        android:layout_marginTop="@dimen/md_menu_gap"
+        android:background="@color/md_white_1000"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/et_search_poi"
+            style="@style/MD_Text_Menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/please_inout_keyword"/>
+
         <include layout="@layout/component_common_using_address"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_card_gap"
+            android:background="@color/window_bg"/>
+
+        <include
+            layout="@layout/common_listview_layout"/>
+
     </LinearLayout>
-
 </RelativeLayout>
-
