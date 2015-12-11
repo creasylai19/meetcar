@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
@@ -37,15 +38,18 @@ import com.umeng.update.UmengUpdateAgent;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import thirdparts.amap.LocationService;
+import thirdparts.amap.MyLocationOverlay;
 import thirdparts.amap.OffLineMapUtils;
 import thirdparts.umeng.share.BaseShareFrame;
 
-public class MainMapActivity extends BaseActivity implements View.OnClickListener {
+public class MainMapActivity extends BaseActivity implements View.OnClickListener, LocationService.LocationListener {
 
 	private Drawer result = null;
 	private AccountHeader headerResult = null;
 	private UserInterface mUserInterface;
 	private AMap aMap;
+	private MyLocationOverlay myLocationOverlay;
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
@@ -92,9 +96,6 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 
 	@Override
 	public void initData(Bundle savedInstanceState) {
-		mUserInterface.mapView.onCreate(savedInstanceState);// 必须要写
-		aMap = mUserInterface.mapView.getMap();
-		MapsInitializer.sdcardDir = OffLineMapUtils.getSdCacheDir(this);
 		ViewGroup menu_footview = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_main_map_menu_footview, null, false);
 		mUserInterface.iv_menu_footview = (ImageView) menu_footview.findViewById(R.id.iv_menu_footview);
 		mUserInterface.iv_menu_footview.setOnClickListener(this);
@@ -172,6 +173,14 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 			//set the active profile
 			headerResult.setActiveProfile(profile4);
 		}
+		initMapView(savedInstanceState);
+	}
+
+	private void initMapView(Bundle savedInstanceState) {
+		mUserInterface.mapView.onCreate(savedInstanceState);// 必须要写
+		aMap = mUserInterface.mapView.getMap();
+		MapsInitializer.sdcardDir = OffLineMapUtils.getSdCacheDir(this);
+		myLocationOverlay = new MyLocationOverlay(this, aMap);
 	}
 
 	private void goToChatPage() {
@@ -282,6 +291,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		super.onResume();
 		MobclickAgent.onResume(this);
 		mUserInterface.mapView.onResume();
+		LocationService.getInstance().registerListener(this, this);
 	}
 
 	/**
@@ -292,16 +302,17 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		super.onPause();
 		MobclickAgent.onPause(this);
 		mUserInterface.mapView.onPause();
+		LocationService.getInstance().unregisterListener(this);
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		mUserInterface.mapView.onSaveInstanceState(outState);//高德地图
 		//add the values which need to be saved from the drawer to the bundle
 		outState = result.saveInstanceState(outState);
 		//add the values which need to be saved from the accountHeader to the bundle
 		outState = headerResult.saveInstanceState(outState);
-		mUserInterface.mapView.onSaveInstanceState(outState);//高德地图
-		super.onSaveInstanceState(outState);
 	}
 
 	/**
@@ -316,6 +327,11 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 
 	private void findViews(UserInterface mUserInterface) {
 		mUserInterface.mapView = (MapView) findViewById(R.id.map);
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation location) {
+		myLocationOverlay.setMyLocationData(location);
 	}
 
 	private class UserInterface {

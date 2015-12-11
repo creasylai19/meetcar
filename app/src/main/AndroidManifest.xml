@@ -158,8 +158,11 @@
                     android:scheme="rong"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SearchPOIActivity">
-        </activity>
+        <activity android:name=".activities.SearchPOIActivity"/>
+        <!-- 高德定位 start-->
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
+        <!-- 高德定位 end-->
     </application>
 
 </manifest>
