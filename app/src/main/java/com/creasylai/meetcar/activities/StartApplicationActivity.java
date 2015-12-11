@@ -9,16 +9,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.common.ToastUtils;
 import com.creasylai.meetcar.consts.AppConst;
 import com.creasylai.meetcar.consts.AppPreferenceCache;
+import com.creasylai.meetcar.consts.InterfaceURLs;
+import com.creasylai.meetcar.singleinstance.VolleySingleInstance;
+import com.creasylai.meetcar.utils.ParameterConstructor;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.listener.SocializeListeners;
 import com.umeng.socialize.exception.SocializeException;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.Set;
@@ -104,7 +112,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 //		startActivity(this, MainMapActivity.class);
 //		this.finish();
 		// 添加微信平台
-//		BaseLoginFrame.initWeChatLogin(this);
+//		BaseLoginFrame.initWeChatAndQQLogin(this);
 //		BaseLoginFrame.mController.doOauthVerify(StartApplicationActivity.this, SHARE_MEDIA.WEIXIN, new SocializeListeners.UMAuthListener() {
 //			@Override
 //			public void onStart(SHARE_MEDIA platform) {
@@ -148,11 +156,11 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 //			}
 //		} );
 		ToastUtils.toastShort(this, R.string.login_using_qq);
-		oauthVerifySuccess(null);
+//		oauthVerifySuccess(null);
 	}
 
 	private void qq_login() {
-		BaseLoginFrame.initWeChatLogin(this);
+		BaseLoginFrame.initWeChatAndQQLogin(this);
 		BaseLoginFrame.mController.doOauthVerify(StartApplicationActivity.this, SHARE_MEDIA.QQ, new SocializeListeners.UMAuthListener() {
 			@Override
 			public void onStart(SHARE_MEDIA platform) {
@@ -167,6 +175,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 			@Override
 			public void onComplete(Bundle value, SHARE_MEDIA platform) {
 				Toast.makeText(StartApplicationActivity.this, "授权完成", Toast.LENGTH_SHORT).show();
+				oauthVerifyRegistered(value.getString("openid"), AppConst.LOGIN_TYPE.QQ);
 				//获取相关授权信息
 				BaseLoginFrame.mController.getPlatformInfo(StartApplicationActivity.this, SHARE_MEDIA.QQ, new SocializeListeners.UMDataListener() {
 					@Override
@@ -183,7 +192,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 								sb.append(key + "=" + info.get(key).toString() + "\r\n");
 							}
 							Log.d("TestData", sb.toString());
-							oauthVerifySuccess(null);
+//							oauthVerifySuccess(null);
 						} else {
 							Log.d("TestData", "发生错误：" + status);
 						}
@@ -198,9 +207,38 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 		});
 	}
 
-	private void oauthVerifySuccess(Map<String, Object> info) {
-		//TODO GET USER_TOKEN
-		AppPreferenceCache.getInstance(this).setUserToken("ceshi");
+	private void oauthVerifyRegistered(String openid, int type) {
+		JSONObject requestData = new JSONObject();
+		ParameterConstructor.putParaInJson("openid", openid, requestData);
+		ParameterConstructor.putParaInJson("type", type, requestData);
+		JsonObjectRequest getString = new JsonObjectRequest(InterfaceURLs.IS_REGISTERED, ParameterConstructor.getRequestJson(requestData, this), new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				dismissProgress();
+				if( ParameterConstructor.getResponStatus(response, StartApplicationActivity.this) != 200 ) {
+					doRegister();
+				} else {
+					oauthVerifySuccess(ParameterConstructor.getResponData(response, StartApplicationActivity.this));
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				dismissProgress();
+				ToastUtils.toastShort(StartApplicationActivity.this, R.string.err_unknown);
+			}
+		});
+		showProgress();
+		VolleySingleInstance.getInstance(StartApplicationActivity.this).addToRequestQueue(getString);
+	}
+
+	private void doRegister() {
+
+	}
+
+	private void oauthVerifySuccess(JSONObject jsonObject) {
+		AppPreferenceCache.getInstance(this).setUserToken(jsonObject.optString("token"));
+		AppPreferenceCache.getInstance(this).setUserId(jsonObject.optInt("uid"));
 		goToMainPage();
 	}
 

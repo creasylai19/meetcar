@@ -12,7 +12,7 @@ public class BaseLoginFrame {
 
 	public static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.login");
 	
-	public static void initWeChatLogin(Activity activity) {
+	public static void initWeChatAndQQLogin(Activity activity) {
 		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, AppConst.QQ_APP_ID, AppConst.QQ_APP_KEY);
 		qqSsoHandler.isShareAfterAuthorize();
 		qqSsoHandler.addToSocialSDK();

@@ -50,7 +50,12 @@ public interface AppConst {
 		int COMMON_KEY_8 = 8;
 		int COMMON_KEY_9 = 9;
 
-		int GO_HOME_DELAY = 1000;
+		int GO_HOME_DELAY = 500;
+	}
+
+	interface LOGIN_TYPE {
+		int WE_CHAT = 1;
+		int QQ = 2;
 	}
 
 }
