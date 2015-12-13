@@ -12,4 +12,6 @@
     <string name="can_not_find_version_name">找不到版本信息</string>
     <string name="title_activity_conversation">对话框</string>
     <string name="please_inout_keyword">请输入关键字</string>
+    <string name="search_destination">点击搜索目的地</string>
+    <string name="start_chat">开始聊天</string>
 </resources>

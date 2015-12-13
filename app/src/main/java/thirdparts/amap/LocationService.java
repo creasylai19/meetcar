@@ -7,6 +7,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.creasylai.meetcar.singleinstance.MyLocation;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class LocationService implements AMapLocationListener {
 	private static LocationService instance;
 
 	public ArrayList<LocationListener> listenerList = new ArrayList<>();
+	private Context context;
 
 	private LocationService() {
 	}
@@ -49,7 +51,8 @@ public class LocationService implements AMapLocationListener {
 		listenerList.add(listener);
 		if (1 == listenerList.size()) {
 			// 刚刚有新的listener加入的时候开启服务并更新线程
-			startService(context.getApplicationContext());
+			this.context = context.getApplicationContext();
+			startService(this.context);
 		}
 	}
 
@@ -86,6 +89,7 @@ public class LocationService implements AMapLocationListener {
 
 	@Override
 	public void onLocationChanged(AMapLocation arg0) {
+		MyLocation.getInstance(this.context).setLocationData(arg0);
 		if (listenerList.size() > 0) {
 			for (int i = listenerList.size() - 1; i >= 0; i--) {
 				(listenerList.get(i)).onLocationChanged(arg0);

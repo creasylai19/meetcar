@@ -20,11 +20,85 @@
         android:layout_below="@id/mc_actionbar"
         android:orientation="vertical">
 
+        <com.creasylai.meetcar.customviews.SearchViewBar
+            android:id="@+id/svb_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_clickable_zone"/>
+
         <com.amap.api.maps.MapView
             android:id="@+id/map"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/ll_buttom_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/custom_common_block_high"
+                android:background="@color/md_white_1000"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <Button
+                    android:id="@+id/btn_start_chat"
+                    style="@style/MD_Text_Subhead"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/main_selector_whit_blue_border"
+                    android:text="@string/start_chat"/>
+
+            </RelativeLayout>
+
+            <include layout="@layout/common_layout_horizontal_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_my_location"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@drawable/btn_default_bg"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/iv_my_location"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_location"/>
+
+                <TextView
+                    android:id="@+id/tv_my_location"
+                    style="@style/MD_Text_Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_toRightOf="@+id/iv_my_location"
+                    android:gravity="center_vertical"
+                    android:text="@string/search_destination"/>
+
+                <ImageView
+                    android:layout_width="@dimen/customer_icon_small"
+                    android:layout_height="@dimen/customer_icon_small"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_right_arrow"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -6,7 +6,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -18,6 +23,8 @@ import com.creasylai.meetcar.R;
 import com.creasylai.meetcar.common.ToastUtils;
 import com.creasylai.meetcar.common.WebviewActivity;
 import com.creasylai.meetcar.consts.AppConst;
+import com.creasylai.meetcar.customviews.SearchViewBar;
+import com.creasylai.meetcar.singleinstance.MyLocation;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -61,6 +68,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		setContentView(R.layout.activity_main_map);
 		mUserInterface = new UserInterface();
 		findViews(mUserInterface);
+		mUserInterface.svb_view.setOnClickListener(this);
 //		UmengUpdateAgent.setDeltaUpdate(false);//false代表全量更新，默认true代表增量更新
 //		UmengUpdateAgent.silentUpdate(this);//当用户进入应用首页后如果处于wifi环境检测更新，如果有更新，后台下载新版本，如果下载成功，则进行通知栏展示，用户点击通知栏开始安装
 		UmengUpdateAgent.update(this);//友盟更新
@@ -179,6 +187,8 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 	private void initMapView(Bundle savedInstanceState) {
 		mUserInterface.mapView.onCreate(savedInstanceState);// 必须要写
 		aMap = mUserInterface.mapView.getMap();
+		aMap.getUiSettings().setZoomControlsEnabled(false);
+//		aMap.getUiSettings().set
 		MapsInitializer.sdcardDir = OffLineMapUtils.getSdCacheDir(this);
 		myLocationOverlay = new MyLocationOverlay(this, aMap);
 	}
@@ -268,6 +278,12 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 				this.result.closeDrawer();
 				WebviewActivity.startActivity(this, AppConst.INTERFACE_URLS.WEBSITE, getString(R.string.user_protocol));
 				break;
+			case R.id.svb_view:
+				break;
+			case R.id.btn_start_chat:
+				break;
+			case R.id.rl_my_location:
+				break;
 		}
 	}
 
@@ -327,15 +343,33 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 
 	private void findViews(UserInterface mUserInterface) {
 		mUserInterface.mapView = (MapView) findViewById(R.id.map);
+		mUserInterface.svb_view = (SearchViewBar) findViewById(R.id.svb_view);
+		mUserInterface.ll_buttom_control = (LinearLayout) findViewById(R.id.ll_buttom_control);
+		mUserInterface.btn_start_chat = (Button) findViewById(R.id.btn_start_chat);
+		mUserInterface.rl_my_location = (RelativeLayout) findViewById(R.id.rl_my_location);
+		mUserInterface.tv_my_location = (TextView) findViewById(R.id.tv_my_location);
 	}
 
 	@Override
 	public void onLocationChanged(AMapLocation location) {
 		myLocationOverlay.setMyLocationData(location);
+		if( !mUserInterface.ll_buttom_control.isShown() ) {
+			mUserInterface.ll_buttom_control.setAnimation(AnimationUtils.makeInChildBottomAnimation(this));
+			mUserInterface.ll_buttom_control.invalidate();
+			mUserInterface.ll_buttom_control.setVisibility(View.VISIBLE);
+			mUserInterface.btn_start_chat.setOnClickListener(this);
+			mUserInterface.rl_my_location.setOnClickListener(this);
+			mUserInterface.tv_my_location.setText(MyLocation.getInstance(this).getAddress());
+		}
 	}
 
 	private class UserInterface {
 		public ImageView iv_menu_footview;
 		public MapView mapView;
+		public SearchViewBar svb_view;
+		public LinearLayout ll_buttom_control;
+		public Button btn_start_chat;
+		public RelativeLayout rl_my_location;
+		public TextView tv_my_location;
 	}
 }

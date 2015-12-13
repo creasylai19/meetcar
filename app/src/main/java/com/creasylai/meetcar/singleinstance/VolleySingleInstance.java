@@ -15,7 +15,7 @@ public class VolleySingleInstance {
 	private static VolleySingleInstance mInstance;
 	private RequestQueue mRequestQueue;
 	private ImageLoader mImageLoader;
-	private static Context mCtx;
+	private Context mCtx;
 
 	private VolleySingleInstance(Context context) {
 		// getApplicationContext() is key, it keeps you from leaking the

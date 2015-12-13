@@ -3,7 +3,7 @@
 
     <color name="main_blue">#0091EA</color>
     <color name="main_red">#E51C23</color>
-    <color name="main_bg">#EEEEEE</color>
+    <color name="main_bg">@color/md_grey_200</color>
     <color name="main_actionbar">#FAFAFA</color>
 
     <color name="accent">@color/colorAccent</color>

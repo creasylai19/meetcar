@@ -16,14 +16,12 @@
     <dimen name="md_common_image_size">24dp</dimen>
     <dimen name="md_dialog_padding">24dp</dimen>
     <dimen name="md_common_retain_zone">16dp</dimen>
+    <dimen name="customer_icon_small">16dp</dimen>
     <dimen name="md_menu_gap">8dp</dimen>
     <dimen name="md_card_gap">8dp</dimen>
     <dimen name="custom_common_gap">2dp</dimen>
     <dimen name="md_tab_buttom_line_height">2dp</dimen>
     <dimen name="md_card_corner_border">2dp</dimen>
-
-
-    <dimen name="customer_icon_small">16dp</dimen>
 
     <!-- Text Start-->
     <dimen name="md_text_caption">12sp</dimen>
