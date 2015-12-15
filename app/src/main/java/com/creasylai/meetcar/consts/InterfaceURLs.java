@@ -8,5 +8,6 @@ public interface InterfaceURLs {
 	String INTERFACE_PREFIX = "http://43.241.223.69:8001/";
 	String IS_REGISTERED = INTERFACE_PREFIX + "api/isRegister";
 	String DO_REGISTER = INTERFACE_PREFIX + "api/doRegister";
+	String GET_NEARBY_USERS = INTERFACE_PREFIX + "api/getNearUsers";
 
 }

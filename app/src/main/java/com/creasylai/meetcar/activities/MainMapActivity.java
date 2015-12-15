@@ -18,13 +18,22 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
+import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.LatLng;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.creasylai.meetcar.BaseActivity;
 import com.creasylai.meetcar.R;
+import com.creasylai.meetcar.bean.UserBean;
 import com.creasylai.meetcar.common.ToastUtils;
 import com.creasylai.meetcar.common.WebviewActivity;
 import com.creasylai.meetcar.consts.AppConst;
+import com.creasylai.meetcar.consts.InterfaceURLs;
 import com.creasylai.meetcar.customviews.SearchViewBar;
 import com.creasylai.meetcar.singleinstance.MyLocation;
+import com.creasylai.meetcar.singleinstance.VolleySingleInstance;
+import com.creasylai.meetcar.utils.ParameterConstructor;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -43,20 +52,30 @@ import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.umeng.update.UmengUpdateAgent;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import thirdparts.amap.LocationService;
+import thirdparts.amap.LocationHelper;
+import thirdparts.amap.MapUtils;
 import thirdparts.amap.MyLocationOverlay;
 import thirdparts.amap.OffLineMapUtils;
+import thirdparts.amap.OnCameraPositionChanged;
+import thirdparts.amap.OnMapLoadFinished;
+import thirdparts.amap.UserBeanOverlay;
 import thirdparts.umeng.share.BaseShareFrame;
 
-public class MainMapActivity extends BaseActivity implements View.OnClickListener, LocationService.LocationListener {
+public class MainMapActivity extends BaseActivity implements View.OnClickListener, LocationHelper.LocationListener {
 
 	private Drawer result = null;
 	private AccountHeader headerResult = null;
 	private UserInterface mUserInterface;
 	private AMap aMap;
 	private MyLocationOverlay myLocationOverlay;
+	private UserBeanOverlay userBeanOverlay;
+	private LatLng lastMapCenter;
+	private boolean moveMapByUser = true;
 
 	@Override
 	public void initView(Bundle savedInstanceState) {
@@ -190,7 +209,70 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		aMap.getUiSettings().setZoomControlsEnabled(false);
 //		aMap.getUiSettings().set
 		MapsInitializer.sdcardDir = OffLineMapUtils.getSdCacheDir(this);
+		aMap.setOnMapLoadedListener(new OnMapLoadFinished(aMap, null, new OnMapLoadFinished.CustomOnMapLoadedListener() {
+			@Override
+			public void onMapLoaded(LatLng mLatLng) {
+				MainMapActivity.this.lastMapCenter = MapUtils.getMapCenter(MainMapActivity.this.aMap);
+			}
+		}));
 		myLocationOverlay = new MyLocationOverlay(this, aMap);
+		userBeanOverlay = new UserBeanOverlay(this, aMap, new UserBeanOverlay.CustomOnMarkerClickListener() {
+			@Override
+			public void onMarkerClick(UserBean userBean) {
+				MapUtils.animateTo(MainMapActivity.this.aMap, new LatLng(userBean.getLatitude(), userBean.getLongitude()));
+				moveMapByUser = false;
+			}
+		});
+		aMap.setOnCameraChangeListener(new OnCameraPositionChanged(new OnCameraPositionChanged.CustomOnCameraPositionChangeListener() {
+			@Override
+			public void onCameraPositionChangeFinish(CameraPosition cameraPosition) {
+				if( !moveMapByUser ) {
+					moveMapByUser = true;
+				} else {
+					if (MapUtils.getDistance(MainMapActivity.this.lastMapCenter, cameraPosition.target) > AppConst.STATIC_INT_KEY.REQUEST_USE_DISTANCE) {
+						requestAroundUser(cameraPosition.target, null);
+					}
+				}
+			}
+		}));
+	}
+
+	private void requestAroundUser(LatLng src, LatLng dest) {
+		lastMapCenter = MapUtils.getMapCenter(aMap);
+		JSONObject srcJson = new JSONObject();
+		if( null != dest ) {
+			ParameterConstructor.putParaInJson("latitude", src.latitude, srcJson);
+			ParameterConstructor.putParaInJson("longitude", src.longitude, srcJson);
+		}
+		JSONObject destJson = new JSONObject();
+		if( null != dest ) {
+			ParameterConstructor.putParaInJson("latitude", dest.latitude, destJson);
+			ParameterConstructor.putParaInJson("longitude", dest.longitude, destJson);
+		}
+		JSONObject requestData = new JSONObject();
+		ParameterConstructor.putParaInJson("src", srcJson, requestData);
+		ParameterConstructor.putParaInJson("dest", destJson, requestData);
+		JsonObjectRequest getNearUsers = new JsonObjectRequest(InterfaceURLs.GET_NEARBY_USERS, ParameterConstructor.getRequestJson(requestData, this), new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				responseAroundUser(ParameterConstructor.getResponDataWithErrorToast(response, MainMapActivity.this));
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				ToastUtils.toastShort(MainMapActivity.this, R.string.err_unknown);
+			}
+		});
+		VolleySingleInstance.getInstance(this).addToRequestQueue(getNearUsers);
+	}
+
+	private void responseAroundUser(JSONObject responDataWithErrorToast) {
+		JSONArray userBeans = responDataWithErrorToast.optJSONArray("items");
+		userBeanOverlay.addAllUserBeans(UserBean.getUserBeans(userBeans.toString()));
+		for (int i = 0; i < 10; i++) {
+			userBeanOverlay.addUserBean(UserBean.getTestBean());
+		}
+		userBeanOverlay.addMarkersToMap();
 	}
 
 	private void goToChatPage() {
@@ -307,7 +389,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		super.onResume();
 		MobclickAgent.onResume(this);
 		mUserInterface.mapView.onResume();
-		LocationService.getInstance().registerListener(this, this);
+		LocationHelper.getInstance().registerListener(this, this);
 	}
 
 	/**
@@ -318,7 +400,7 @@ public class MainMapActivity extends BaseActivity implements View.OnClickListene
 		super.onPause();
 		MobclickAgent.onPause(this);
 		mUserInterface.mapView.onPause();
-		LocationService.getInstance().unregisterListener(this);
+		LocationHelper.getInstance().unregisterListener(this);
 	}
 
 	@Override

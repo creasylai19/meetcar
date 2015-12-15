@@ -23,7 +23,7 @@
         <com.creasylai.meetcar.customviews.SearchViewBar
             android:id="@+id/svb_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/md_clickable_zone"/>
+            android:layout_height="wrap_content"/>
 
         <com.amap.api.maps.MapView
             android:id="@+id/map"

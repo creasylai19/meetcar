@@ -1,6 +1,7 @@
 package thirdparts.amap;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -11,7 +12,7 @@ import com.creasylai.meetcar.singleinstance.MyLocation;
 
 import java.util.ArrayList;
 
-public class LocationService implements AMapLocationListener {
+public class LocationHelper implements AMapLocationListener {
 
 	public interface LocationListener {
 		void onLocationChanged(AMapLocation location);
@@ -19,17 +20,17 @@ public class LocationService implements AMapLocationListener {
 	public AMapLocationClient locationClient = null;
 	private AMapLocationClientOption locationOption = null;
 	
-	private static LocationService instance;
+	private static LocationHelper instance;
 
 	public ArrayList<LocationListener> listenerList = new ArrayList<>();
 	private Context context;
 
-	private LocationService() {
+	private LocationHelper() {
 	}
 	
-	public static LocationService getInstance() {
+	public static LocationHelper getInstance() {
 		if( instance == null ) {
-			instance = new LocationService();
+			instance = new LocationHelper();
 		}
 		return instance;
 	}
@@ -89,10 +90,12 @@ public class LocationService implements AMapLocationListener {
 
 	@Override
 	public void onLocationChanged(AMapLocation arg0) {
-		MyLocation.getInstance(this.context).setLocationData(arg0);
-		if (listenerList.size() > 0) {
-			for (int i = listenerList.size() - 1; i >= 0; i--) {
-				(listenerList.get(i)).onLocationChanged(arg0);
+		if(!TextUtils.isEmpty(arg0.getAddress())) {
+			MyLocation.getInstance(this.context).setLocationData(arg0);
+			if (listenerList.size() > 0) {
+				for (int i = listenerList.size() - 1; i >= 0; i--) {
+					(listenerList.get(i)).onLocationChanged(arg0);
+				}
 			}
 		}
 	}

@@ -1,6 +1,11 @@
 package com.creasylai.meetcar.bean;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by laicreasy on 15/11/28.
@@ -14,6 +19,10 @@ public class UserBean {
 	private String headurl;
 	private String birthday;
 	private String bg_url;
+	private String latitude;
+	private String longitude;
+	private int uid;
+	private String token;
 
 	public String getNickname() {
 		return nickname;
@@ -71,10 +80,42 @@ public class UserBean {
 		this.bg_url = bg_url;
 	}
 
-	public static UserBean getUserBean(String json) {
+	public double getLongitude() {
+		return Double.parseDouble(longitude);
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return Double.parseDouble(latitude);
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public static UserBean getUserBean(String jsonStr) {
 		UserBean obj = new UserBean();
 		Gson gson = new Gson();
-		obj = gson.fromJson(json, UserBean.class);
+		obj = gson.fromJson(jsonStr, UserBean.class);
 		return obj;
 	}
 
@@ -83,14 +124,26 @@ public class UserBean {
 		return gson.toJson(userBean);
 	}
 
+	public static ArrayList<UserBean> getUserBeans(String jsonArrayStr) {
+		Gson gson = new Gson();
+		Type collectionType = new TypeToken<ArrayList<UserBean>>(){}.getType();
+		ArrayList<UserBean> userBeans = gson.fromJson(jsonArrayStr, collectionType);
+		return userBeans;
+	}
+
+	static Random random = new Random();
 	public static UserBean getTestBean() {
 		UserBean userBean = new UserBean();
 		userBean.setBirthday("90后");
 		userBean.setJob("计算机|互联网");
 		userBean.setNickname("creasylai");
-		userBean.setSex(1);
+		userBean.setSex(random.nextInt(100) % 3);
 		userBean.setSignature("我思固我在");
 		userBean.setHeadurl("http://img1.2345.com/duoteimg/qqTxImg/2013/12/ka_3/04-054424_937.jpg");
+		userBean.setLatitude("22.5" + random.nextInt(9) + random.nextInt(9) +"523");
+		userBean.setLongitude("113.9" + random.nextInt(9) + random.nextInt(9) +"575");
+		userBean.setUid(random.nextInt(100000));
+		userBean.setToken("2134149709dsaklhlk");
 		return userBean;
 	}
 

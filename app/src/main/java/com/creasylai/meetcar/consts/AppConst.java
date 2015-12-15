@@ -51,6 +51,8 @@ public interface AppConst {
 		int COMMON_KEY_9 = 9;
 
 		int GO_HOME_DELAY = 500;
+		int REQUEST_USE_DISTANCE = 500;
+		int DEFAULT_ZOOM = 15;
 	}
 
 	interface LOGIN_TYPE {
