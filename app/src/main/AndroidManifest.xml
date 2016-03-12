@@ -140,7 +140,8 @@
             android:theme="@style/activityStyle"/>
         <activity
             android:name=".activities.FeedbackActivity"
-            android:theme="@style/activityStyle"/>
+            android:theme="@style/activityStyle"
+            android:windowSoftInputMode="stateAlwaysVisible"/>
         <!-- 会话界面 -->
         <activity
             android:name=".activities.im.ConversationActivity"

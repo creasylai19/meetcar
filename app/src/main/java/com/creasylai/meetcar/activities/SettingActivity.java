@@ -14,9 +14,6 @@ import com.creasylai.meetcar.consts.AppConst;
 import com.creasylai.meetcar.consts.AppPreferenceCache;
 import com.umeng.analytics.MobclickAgent;
 
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
-
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
 	private UserInterface mUserInterface;
@@ -60,7 +57,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 				startActivity(this, ChatSettingActivity.class);
 				break;
 			case R.id.rl_user_feedback:
-				RongIM.getInstance().startConversation(this, Conversation.ConversationType.APP_PUBLIC_SERVICE, "KEFU144889862239428", getString(R.string.app_name));
+//				RongIM.getInstance().startConversation(this, Conversation.ConversationType.APP_PUBLIC_SERVICE, "KEFU144889862239428", getString(R.string.app_name));
 				/**
 				 * 启动单聊
 				 * context - 应用上下文。
@@ -70,7 +67,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //				if (RongIM.getInstance() != null) {
 //					RongIM.getInstance().startPrivateChat(SettingActivity.this, "2462", "hello");
 //				}
-//				startActivity(this, FeedbackActivity.class);
+				startActivity(this, FeedbackActivity.class);
 				break;
 			case R.id.rl_about_meetcar:
 				startActivity(this, AboutMeetcarActivity.class);

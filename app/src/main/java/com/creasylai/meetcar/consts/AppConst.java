@@ -33,9 +33,12 @@ public interface AppConst {
 		String COMMON_KEY = "COMMON_KEY";
 		String APP_SHARE_PREFERENCE = "APP_SHARE_PREFERENCE";
 		String USER_TOKEN = "USER_TOKEN";
+		String RONG_TOKEN = "RONG_TOKEN";
 		String USER_ID = "USER_ID";
 		String LOGIN_OUT = "LOGIN_OUT";
 		String USER_INFO = "USER_INFO";
+		String FEEDBACK_CONTENT = "FEEDBACK_CONTENT";
+		String USER_EMAIL = "USER_EMAIL";
 	}
 
 	interface STATIC_INT_KEY {

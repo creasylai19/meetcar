@@ -40,7 +40,6 @@ public class AppPreferenceCache {
 	}
 
 	public void setUserToken( String userToken ) {
-
 		editor.putString(AppConst.STATIC_STRING_KEY.USER_TOKEN, userToken);
 		editor.apply();
 	}
@@ -54,6 +53,15 @@ public class AppPreferenceCache {
 		editor.apply();
 	}
 
+	public String getRongToken() {
+		return sharedPreferences.getString(AppConst.STATIC_STRING_KEY.RONG_TOKEN, "");
+	}
+
+	public void setRongToken( String userToken ) {
+		editor.putString(AppConst.STATIC_STRING_KEY.RONG_TOKEN, userToken);
+		editor.apply();
+	}
+
 	public void clearAllCache() {
 		editor.clear();
 		editor.commit();
@@ -61,6 +69,24 @@ public class AppPreferenceCache {
 
 	public UserBean getUserBean() {
 		return UserBean.getUserBean(sharedPreferences.getString(AppConst.STATIC_STRING_KEY.USER_INFO, ""));
+	}
+
+	public String getFeedbackContent() {
+		return sharedPreferences.getString(AppConst.STATIC_STRING_KEY.FEEDBACK_CONTENT, "");
+	}
+
+	public void setFeedbackContent( String feedbackContent ) {
+		editor.putString(AppConst.STATIC_STRING_KEY.FEEDBACK_CONTENT, feedbackContent);
+		editor.apply();
+	}
+
+	public String getUserEmail() {
+		return sharedPreferences.getString(AppConst.STATIC_STRING_KEY.USER_EMAIL, "");
+	}
+
+	public void setUserEmail( String userEmail ) {
+		editor.putString(AppConst.STATIC_STRING_KEY.USER_EMAIL, userEmail);
+		editor.apply();
 	}
 
 }

@@ -3,7 +3,6 @@ package com.creasylai.meetcar.activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,14 +27,15 @@ import com.umeng.socialize.exception.SocializeException;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import thirdparts.umeng.login.BaseLoginFrame;
 
 public class StartApplicationActivity extends BaseActivity implements View.OnClickListener{
 
 	private UserInterface mUserInterface;
+	private Map<String, Object> userInfo;
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -164,7 +164,7 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 		BaseLoginFrame.mController.doOauthVerify(StartApplicationActivity.this, SHARE_MEDIA.QQ, new SocializeListeners.UMAuthListener() {
 			@Override
 			public void onStart(SHARE_MEDIA platform) {
-				Toast.makeText(StartApplicationActivity.this, "授权开始", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(StartApplicationActivity.this, "授权开始", Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -174,27 +174,33 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 
 			@Override
 			public void onComplete(Bundle value, SHARE_MEDIA platform) {
-				Toast.makeText(StartApplicationActivity.this, "授权完成", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(StartApplicationActivity.this, "授权完成", Toast.LENGTH_SHORT).show();
 				oauthVerifyRegistered(value.getString("openid"), AppConst.LOGIN_TYPE.QQ);
+				userInfo = new HashMap<String, Object>();
+				userInfo.put("openid", value.getString("openid"));
 				//获取相关授权信息
 				BaseLoginFrame.mController.getPlatformInfo(StartApplicationActivity.this, SHARE_MEDIA.QQ, new SocializeListeners.UMDataListener() {
 					@Override
 					public void onStart() {
-						Toast.makeText(StartApplicationActivity.this, "获取平台数据开始...", Toast.LENGTH_SHORT).show();
+//						Toast.makeText(StartApplicationActivity.this, "获取平台数据开始...", Toast.LENGTH_SHORT).show();
 					}
 
 					@Override
 					public void onComplete(int status, Map<String, Object> info) {
 						if (status == 200 && info != null) {
-							StringBuilder sb = new StringBuilder();
-							Set<String> keys = info.keySet();
-							for (String key : keys) {
-								sb.append(key + "=" + info.get(key).toString() + "\r\n");
-							}
-							Log.d("TestData", sb.toString());
+//							StringBuilder sb = new StringBuilder();
+//							Set<String> keys = info.keySet();
+//							for (String key : keys) {
+//								sb.append(key + "=" + info.get(key).toString() + "\r\n");
+//							}
+//							Log.d("TestData", sb.toString());
 //							oauthVerifySuccess(null);
-						} else {
-							Log.d("TestData", "发生错误：" + status);
+							userInfo.put("headurl", info.get("profile_image_url").toString());
+							userInfo.put("nickname", info.get("screen_name").toString());
+							userInfo.put("sex", "男".equals(info.get("gender")) ? AppConst.SEX.MAN : ("女".equals(info.get("gender")) ? AppConst.SEX.WOMAN : AppConst.SEX.OTHER));
+							userInfo.put("city", info.get("city").toString());
+							userInfo.put("province", info.get("province").toString());
+							userInfo.put("type", AppConst.LOGIN_TYPE.QQ);
 						}
 					}
 				});
@@ -233,12 +239,35 @@ public class StartApplicationActivity extends BaseActivity implements View.OnCli
 	}
 
 	private void doRegister() {
-
+		JSONObject requestData = new JSONObject();
+		ParameterConstructor.putParaInJson("openid", userInfo.get("openid"), requestData);
+		ParameterConstructor.putParaInJson("headurl", userInfo.get("headurl"), requestData);
+		ParameterConstructor.putParaInJson("nickname", userInfo.get("nickname"), requestData);
+		ParameterConstructor.putParaInJson("sex", userInfo.get("sex"), requestData);
+		ParameterConstructor.putParaInJson("city", userInfo.get("city").toString(), requestData);
+		ParameterConstructor.putParaInJson("province", userInfo.get("province").toString(), requestData);
+		ParameterConstructor.putParaInJson("type", userInfo.get("type"), requestData);
+		JsonObjectRequest getString = new JsonObjectRequest(InterfaceURLs.DO_REGISTER, ParameterConstructor.getRequestJson(requestData, this), new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				dismissProgress();
+				oauthVerifySuccess(ParameterConstructor.getResponDataWithErrorToast(response, StartApplicationActivity.this));
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				dismissProgress();
+				ToastUtils.toastShort(StartApplicationActivity.this, R.string.err_unknown);
+			}
+		});
+		showProgress("正在注册中...");
+		VolleySingleInstance.getInstance(StartApplicationActivity.this).addToRequestQueue(getString);
 	}
 
 	private void oauthVerifySuccess(JSONObject jsonObject) {
 		AppPreferenceCache.getInstance(this).setUserToken(jsonObject.optString("token"));
 		AppPreferenceCache.getInstance(this).setUserId(jsonObject.optInt("uid"));
+		AppPreferenceCache.getInstance(this).setRongToken(jsonObject.optString("rong_token"));
 		goToMainPage();
 	}
 

@@ -15,4 +15,7 @@
     <string name="login_using_qq">请使用QQ进行登录</string>
     <string name="qq_login">Q Q</string>
     <string name="wechat_login">微信</string>
+
+    <!-- 意见反馈 -->
+    <string name="feedback_success">您的意见我们已收到，谢谢您对我们的关注</string>
 </resources>

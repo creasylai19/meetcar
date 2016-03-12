@@ -9,5 +9,6 @@ public interface InterfaceURLs {
 	String IS_REGISTERED = INTERFACE_PREFIX + "api/isRegister";
 	String DO_REGISTER = INTERFACE_PREFIX + "api/doRegister";
 	String GET_NEARBY_USERS = INTERFACE_PREFIX + "api/getNearUsers";
+	String FEEDBACK = INTERFACE_PREFIX + "api/doUserFeedback";
 
 }
